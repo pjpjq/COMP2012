@@ -6,7 +6,7 @@
 using namespace std;
 
 File::File() {
-	name = '\0';
+	name = nullptr;
 }
 
 File::~File() {

@@ -38,8 +38,8 @@ void Folder::addFile(const File &file) {
 }
 
 bool Folder::contains(const File &file) const {
-	for (auto &file_ptr : files) {
-		if (file.equals(*file_ptr)) {
+	for (int i = 0; i < currSize; ++i) {
+		if (file.equals(*(files[i]))) {
 			return true;
 		}
 	}
@@ -47,5 +47,7 @@ bool Folder::contains(const File &file) const {
 }
 
 void Folder::print() const {
-	
+	for (int i = 0; i < currSize; ++i) {
+		files[i]->print();
+	}
 }

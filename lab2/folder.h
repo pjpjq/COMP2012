@@ -5,8 +5,7 @@
 
 const int FOLDER_DEFAULT_SIZE = 4;
 
-class Folder
-{
+class Folder {
 public:
 	Folder(unsigned int size = FOLDER_DEFAULT_SIZE);
 	~Folder();
