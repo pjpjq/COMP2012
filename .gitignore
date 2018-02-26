@@ -54,3 +54,8 @@ fabric.properties
 CMakeLists.txt
 *.project
 
+*.idea
+*.idea_modules
+*.settings
+*.xml
+
