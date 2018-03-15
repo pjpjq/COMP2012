@@ -7,12 +7,14 @@
 
 #include "Card.h"
 
-bool Card::operator ^(const Card& t) const {
-	if (t.color == color)
-		return true;
-	if (t.color == Color::meta)
-		return true;
-	return false;
+bool Card::operator^(const Card &t) const {
+    if (t.color == color) {
+        return true;
+    }
+    if (t.color == Color::meta) {
+        return true;
+    }
+    return false;
 }
 
 Card::Card(Color color, int mark) : color(color), point(mark) {

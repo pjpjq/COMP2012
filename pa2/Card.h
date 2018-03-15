@@ -16,41 +16,43 @@
 using namespace std;
 
 class CardPile;
+
 class Player;
 
 class Card {
 
-	friend ostream& operator<<(ostream& os, const Card& c) {
-		c.serialize(os);
-		return os;
-	}
+    friend ostream &operator<<(ostream &os, const Card &c) {
+        c.serialize(os);
+        return os;
+    }
 
 public:
-	// Return true if playing the card t after this card is valid. False if vice-versa.
-	// e.g. "(a ^ b)" should return true if b can be played after a.
-	virtual bool operator^(const Card& t) const;
+    // Return true if playing the card t after this card is valid. False if vice-versa.
+    // e.g. "(a ^ b)" should return true if b can be played after a.
+    virtual bool operator^(const Card &t) const;
 
-	virtual void castEffect(Player*& currentPlayer, CardPile& drawPile, CardPile& discardPile) = 0;
+    virtual void castEffect(Player *&currentPlayer, CardPile &drawPile, CardPile &discardPile) = 0;
 
-	Card(Color color, int mark);
-	virtual ~Card() = default;
+    Card(Color color, int mark);
 
-	// return the mark of the card
-	int getPoint() const {return point;}
+    virtual ~Card() = default;
 
-	// does not do anything here for most of the card. This will be called when the deck is re-shuffled.
-	// WildCard and DrawFourCard assigned with specific color should restore its color to Color::meta in this function.
-	virtual void init() {}
+    // return the mark of the card
+    int getPoint() const { return point; }
+
+    // does not do anything here for most of the card. This will be called when the deck is re-shuffled.
+    // WildCard and DrawFourCard assigned with specific color should restore its color to Color::meta in this function.
+    virtual void init() {}
 
 protected:
-	// Print the card
-	virtual void serialize(ostream& os) const = 0;
+    // Print the card
+    virtual void serialize(ostream &os) const = 0;
 
-	Color color;
+    Color color;
 
 
 private:
-	const int point;
+    const int point;
 
 };
 

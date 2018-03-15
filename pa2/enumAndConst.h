@@ -10,7 +10,9 @@
 
 
 //c++ 11
-enum class Color { red, blue, green, yellow, meta };
+enum class Color {
+    red, blue, green, yellow, meta
+};
 
 const int POINT_SKIPCARD = 20;
 const int POINT_DRAWTWOCARD = 20;

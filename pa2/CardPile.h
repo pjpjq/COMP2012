@@ -13,27 +13,31 @@
 class CardPile {
 public:
 
-	CardPile& operator+=(Card*);
+    CardPile &operator+=(Card *);
 
 
-	int getSize() const {return size;}
+    int getSize() const { return size; }
 
 
-	Card* removeCard(int);
-	Card* removeTopCard() {return removeCard(size -1); }
+    Card *removeCard(int);
 
-	const Card* getTopCard() const { return getCard(size - 1); }
-	const Card* getCard(int index) const { if (index < 0 || index >= size) return nullptr; return cards[index]; }
+    Card *removeTopCard() { return removeCard(size - 1); }
 
-	virtual ~CardPile();
-	void shuffle();
+    const Card *getTopCard() const { return getCard(size - 1); }
 
+    const Card *getCard(int index) const {
+        if (index < 0 || index >= size) { return nullptr; }
+        return cards[index];
+    }
 
+    virtual ~CardPile();
+
+    void shuffle();
 
 
 private:
-	int size = 0;
-	Card** cards = nullptr;
+    int size = 0;
+    Card **cards = nullptr;
 };
 
 #endif /* CARDPILE_H_ */
