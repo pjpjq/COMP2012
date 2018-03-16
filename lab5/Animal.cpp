@@ -1,16 +1,12 @@
 #include "Animal.h"
 
-Animal::Animal(string name)
-{
-    this->name = name;
+Animal::Animal(string name) : name(name) {
 }
 
-void Animal::speak() const
-{
+void Animal::speak() const {
     cout << "My name is " << name << "!";
 }
 
-Animal::~Animal()
-{
+Animal::~Animal() {
     cout << "~Animal()" << endl;
 }

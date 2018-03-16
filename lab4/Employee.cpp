@@ -26,7 +26,6 @@ void Employee::check(Item item) const {
         default:
             cout << "Invalid item." << endl;
     }
-
 }
 
 
