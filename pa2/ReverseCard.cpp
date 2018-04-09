@@ -10,11 +10,6 @@
 
 ReverseCard::ReverseCard(Color color) : Card(color, POINT_REVERSECARD) {}
 
-bool ReverseCard::operator^(const Card &following_card) const {
-    // TODO: Add following reverse card policy
-    return false;
-}
-
 void ReverseCard::castEffect(Player *&currentPlayer, CardPile &drawPile, CardPile &discardPile) {
     // TODO: Add reversing player effect
 }
