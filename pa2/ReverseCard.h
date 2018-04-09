@@ -9,5 +9,4 @@
 #define REVERSECARD_H_
 
 
-
 #endif /* REVERSECARD_H_ */
