@@ -11,5 +11,5 @@ bool Card::operator^(const Card &t) const {
     return t.color == color || t.color == Color::meta;
 }
 
-Card::Card(Color color, int mark) : color(color), point(mark) {}
+Card::Card(Color color, int point) : color(color), point(point) {}
 

@@ -78,6 +78,7 @@ destructor of p3
     delete p2;
     delete p3;
     
+    return 0;
 }
 
 

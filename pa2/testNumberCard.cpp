@@ -14,7 +14,7 @@ using namespace std;
 int main() {
 
 /**
- * Sample Output
+ * Expected Output
 
 R5
 R7
@@ -44,5 +44,5 @@ G7 play after R5? false
     if (result != "R5") {
         cout << "Failed" << endl;
     }
-    
+    return 0;
 }
