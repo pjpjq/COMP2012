@@ -19,6 +19,13 @@ class CardPile;
 
 class Player;
 
+/**
+ * Sequence of playing a card:
+ *  1. Judging if playing the card is valid
+ *  2. Removing the card from the player's hand
+ *  3. Casting the effect of the card (castEffect function here)
+ *  4. Adding the card to the discard pile and becoming the top-card
+ */
 class Card {
     
     friend ostream &operator<<(ostream &os, const Card &c) {
@@ -29,18 +36,21 @@ class Card {
 public:
     // Return true if playing the card t after this card is valid. False if vice-versa.
     // e.g. "(a ^ b)" should return true if b can be played after a.
+    /* Legal or illegal is for drawFourCard instead, not considered here. */
     virtual bool operator^(const Card &t) const;
     
+    /* Triggers the effect of a card. */
     virtual void castEffect(Player *&currentPlayer, CardPile &drawPile, CardPile &discardPile) = 0;
     
     Card(Color color, int mark);
     
     virtual ~Card() = default;
     
-    // return the mark of the card
+    // return the point of the card
     int getPoint() const { return point; }
     
-    // does not do anything here for most of the card. This will be called when the deck is re-shuffled.
+    // Does not do anything here for most of the card.
+    // This will be called when the deck is re-shuffled.
     // WildCard and DrawFourCard assigned with specific color should restore its color to Color::meta in this function.
     virtual void init() {}
 
@@ -49,7 +59,6 @@ protected:
     virtual void serialize(ostream &os) const = 0;
     
     Color color;
-
 
 private:
     const int point;

@@ -8,15 +8,8 @@
 #include "Card.h"
 
 bool Card::operator^(const Card &t) const {
-    if (t.color == color) {
-        return true;
-    }
-    if (t.color == Color::meta) {
-        return true;
-    }
-    return false;
+    return t.color == color || t.color == Color::meta;
 }
 
-Card::Card(Color color, int mark) : color(color), point(mark) {
-}
+Card::Card(Color color, int mark) : color(color), point(mark) {}
 

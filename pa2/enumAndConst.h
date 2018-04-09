@@ -11,7 +11,7 @@
 
 //c++ 11
 enum class Color {
-    red, blue, green, yellow, meta
+    red, blue, green, yellow, meta // meta for a wild card before played
 };
 
 const int POINT_SKIPCARD = 20;
