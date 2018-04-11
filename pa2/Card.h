@@ -20,13 +20,9 @@ class CardPile;
 
 class Player;
 
-/**
- * Sequence of playing a card:
- *  1. Judging if playing the card is valid
- *  2. Removing the card from the player's hand
- *  3. Casting the effect of the card (castEffect() here)
- *  4. Adding the card to the discard pile and becoming the top-card
- */
+#endif /* CARD_H_ */
+
+
 class Card {
     
     friend ostream &operator<<(ostream &os, const Card &c) {
@@ -42,7 +38,13 @@ public:
     // Legal or illegal is for drawFourCard instead, not considered here.
     virtual bool operator^(const Card &t) const;
     
-    /* Triggers the effect of a card. */
+    /**
+     * Sequence of playing a card:
+     *  1. Judging if playing the card is valid
+     *  2. Removing the card from the player's hand
+     *  3. Casting the effect of the card (castEffect() here)
+     *  4. Adding the card to the discard pile and becoming the top-card
+     */
     virtual void castEffect(Player *&currentPlayer, CardPile &drawPile, CardPile &discardPile) = 0;
     
     virtual ~Card() = default;
@@ -65,5 +67,3 @@ private:
     const int point;
     
 };
-
-#endif /* CARD_H_ */

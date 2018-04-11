@@ -27,7 +27,7 @@ bool NumberCard::operator^(const Card &following_card) const {
 }
 
 void NumberCard::castEffect(Player *&currentPlayer, CardPile &drawPile, CardPile &discardPile) {
-    // TODO: Check if there are some effect to implement here...
+    // TODO: Adds implementation of effect
 }
 
 void NumberCard::serialize(ostream &os) const {

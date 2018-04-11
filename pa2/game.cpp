@@ -5,8 +5,6 @@
  *      Author: kevinw
  */
 
-
-
 #include <iostream>
 #include "Player.h"
 #include "NumberCard.h"
@@ -130,4 +128,5 @@ int main() {
         delete players[i];
     }
     delete[] players;
+    return 0;
 }
