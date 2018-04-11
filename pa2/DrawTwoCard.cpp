@@ -11,7 +11,7 @@
 DrawTwoCard::DrawTwoCard(Color color) : SkipCard(color) {}
 
 void DrawTwoCard::castEffect(Player *&currentPlayer, CardPile &drawPile, CardPile &discardPile) {
-    if (!currentPlayer) {
+    if (!currentPlayer || !currentPlayer->getNextPlayer()) {
         return;
     }
     currentPlayer->getNextPlayer()->drawCard(drawPile, discardPile, 2);

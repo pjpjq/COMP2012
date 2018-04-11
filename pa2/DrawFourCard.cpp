@@ -10,7 +10,7 @@ void DrawFourCard::castEffect(Player *&currentPlayer, CardPile &drawPile, CardPi
     if (!currentPlayer || !currentPlayer->getNextPlayer()) {
         return;
     }
-    /* Current player chooses color first, then DrawFourCard effect including if next player appeals. */
+    /* Current player chooses color first, then asks if next player'd appeal. */
     color = currentPlayer->chooseColor();
     if (currentPlayer->getNextPlayer()->appealDrawFour()) {
         bool legal = true;
@@ -24,10 +24,10 @@ void DrawFourCard::castEffect(Player *&currentPlayer, CardPile &drawPile, CardPi
         if (legal) { /* Bad appeal... */
             currentPlayer->getNextPlayer()->drawCard(drawPile, discardPile, 6);
             currentPlayer = currentPlayer->getNextPlayer();
-        } else { /* Success appeal! */
+        } else { /* Successful appeal! */
             currentPlayer->drawCard(drawPile, discardPile, 4);
         }
-    } else { /* Doesn't appeal... */
+    } else { /* Doesn't want to appeal... */
         currentPlayer->getNextPlayer()->drawCard(drawPile, discardPile, 4);
         currentPlayer = currentPlayer->getNextPlayer();
     }

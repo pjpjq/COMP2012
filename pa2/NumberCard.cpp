@@ -14,11 +14,6 @@ bool NumberCard::operator^(const Card &following_card) const {
     return Card::operator^(following_card) || following_card.getPoint() == getPoint();
 }
 
-void NumberCard::castEffect(Player *&currentPlayer, CardPile &drawPile, CardPile &discardPile) {
-    // TODO: Need implementation of effect???
-    // No effect for a numberCard...
-}
-
 void NumberCard::serialize(ostream &os) const {
     os << (color == Color::red ? "R" :
            color == Color::blue ? "B" :
