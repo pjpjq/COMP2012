@@ -29,7 +29,7 @@ void Player::drawCard(CardPile &drawPile, CardPile &discardPile, int number_of_c
     for (int i = 0; i < number_of_cards; ++i) {
         if (drawPile.getSize() == 0) {
             if (discardPile.getSize() <= 1) {
-                /* Both piles cannot be drawn then stop. */
+                /* Both piles cannot be drawn anymore then stop. */
                 return;
             }
             /* Moves all cards below the top of discardPile to drawPile and shuffles. */

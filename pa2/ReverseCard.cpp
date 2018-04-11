@@ -26,7 +26,7 @@ void ReverseCard::castEffect(Player *&currentPlayer, CardPile &drawPile, CardPil
     }
     /* 2 or more players */
     Player *cur = currentPlayer;
-    /* currentPlayer is not actually current node (it's unchanged!)! cur is! */
+    /* currentPlayer is not actually the current node (it's unchanged!)! cur is! */
     Player *nextToReverse = currentPlayer->getNextPlayer();
     while (nextToReverse != currentPlayer) {  /* Loops until the tail. */
         Player *toReverse = nextToReverse;

@@ -14,6 +14,8 @@ class NumberCard : public Card {
 public:
     NumberCard(int number, Color color);
     
+    void castEffect(Player *&currentPlayer, CardPile &drawPile, CardPile &discardPile) override;
+    
     virtual bool operator^(const Card &following_card) const override;
 
 protected:

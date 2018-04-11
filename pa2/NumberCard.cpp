@@ -21,3 +21,7 @@ void NumberCard::serialize(ostream &os) const {
            color == Color::yellow ? "Y" : "ERROR") << getPoint();
 }
 
+void NumberCard::castEffect(Player *&currentPlayer, CardPile &drawPile, CardPile &discardPile) {
+    return;
+}
+
