@@ -7,6 +7,7 @@
 
 #include "SkipCard.h"
 #include "Player.h"
+#include <typeinfo>
 
 SkipCard::SkipCard(Color color) : Card(color, POINT_SKIPCARD) {}
 
