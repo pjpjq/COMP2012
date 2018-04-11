@@ -21,8 +21,6 @@ public:
 
 protected:
     virtual void serialize(ostream &os) const override;
-    
-    SkipCard(Color color, int point);
 };
 
 #endif /* SKIPCARD_H_ */

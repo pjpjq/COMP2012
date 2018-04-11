@@ -16,7 +16,7 @@ bool SkipCard::operator^(const Card &following_card) const {
 
 void SkipCard::castEffect(Player *&currentPlayer, CardPile &drawPile, CardPile &discardPile) {
     if (!currentPlayer) { return; }
-    /* Skips the next player by moving one player forward. */
+    /* Current player plays skip card which skips the next player by moving one player forward. */
     currentPlayer = currentPlayer->getNextPlayer();
 }
 
@@ -26,6 +26,4 @@ void SkipCard::serialize(ostream &os) const {
            color == Color::green ? "G" :
            color == Color::yellow ? "Y" : "ERROR") << "s";
 }
-
-SkipCard::SkipCard(Color color, int point) : Card(color, point) {}
 

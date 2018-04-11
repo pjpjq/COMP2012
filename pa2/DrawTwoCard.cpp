@@ -8,10 +8,15 @@
 #include "DrawTwoCard.h"
 #include "Player.h"
 
-DrawTwoCard::DrawTwoCard(Color color) : SkipCard(color, POINT_DRAWTWOCARD) {}
+DrawTwoCard::DrawTwoCard(Color color) : SkipCard(color) {}
 
 void DrawTwoCard::castEffect(Player *&currentPlayer, CardPile &drawPile, CardPile &discardPile) {
-    // TODO: Next player draw two cards from the drawPlie, skip, need shuffle if not enough card to draw
+    if (!currentPlayer) {
+        return;
+    }
+    currentPlayer->getNextPlayer()->drawCard(drawPile, discardPile, 2);
+    /* Skips the next player by moving one player forward. */
+    currentPlayer = currentPlayer->getNextPlayer();
 }
 
 void DrawTwoCard::serialize(ostream &os) const {
