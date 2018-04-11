@@ -2,7 +2,7 @@
  * CardPile.h
  *
  *  Created on: Jan 30, 2018
- *      Author: kevinw
+ *      Author: kevinw, wpengae
  */
 
 #ifndef CARDPILE_H_

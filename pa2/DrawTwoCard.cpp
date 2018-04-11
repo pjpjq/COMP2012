@@ -2,7 +2,7 @@
  * DrawTwoCard.cpp
  *
  *  Created on: Feb 5, 2018
- *      Author: kevinw
+ *      Author: kevinw, wpengae
  */
 
 #include "DrawTwoCard.h"

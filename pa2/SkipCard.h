@@ -2,7 +2,7 @@
  * SkipCard.h
  *
  *  Created on: Feb 2, 2018
- *      Author: kevinw
+ *      Author: kevinw, wpengae
  */
 
 #ifndef SKIPCARD_H_

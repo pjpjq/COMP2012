@@ -2,7 +2,7 @@
  * WildCard.h
  *
  *  Created on: Feb 6, 2018
- *      Author: kevinw
+ *      Author: kevinw, wpengae
  */
 
 #ifndef WILDCARD_H_

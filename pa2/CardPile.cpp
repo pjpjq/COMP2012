@@ -2,7 +2,7 @@
  * CardPile.cpp
  *
  *  Created on: Jan 30, 2018
- *      Author: kevinw
+ *      Author: kevinw, wpengae
  */
 
 #include "CardPile.h"

@@ -2,7 +2,7 @@
  * SkipCard.cpp
  *
  *  Created on: Feb 2, 2018
- *      Author: kevinw
+ *      Author: kevinw, wpengae
  */
 
 #include "SkipCard.h"
@@ -28,3 +28,4 @@ void SkipCard::serialize(ostream &os) const {
 }
 
 SkipCard::SkipCard(Color color, int point) : Card(color, point) {}
+

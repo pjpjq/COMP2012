@@ -2,7 +2,7 @@
  * DrawTwoCard.h
  *
  *  Created on: Feb 5, 2018
- *      Author: kevinw
+ *      Author: kevinw, wpengae
  */
 
 #ifndef DRAWTWOCARD_H_

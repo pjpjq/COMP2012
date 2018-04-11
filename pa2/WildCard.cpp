@@ -2,7 +2,7 @@
  * WildCard.cpp
  *
  *  Created on: Feb 6, 2018
- *      Author: kevinw
+ *      Author: kevinw, wpengae
  */
 
 #include "WildCard.h"

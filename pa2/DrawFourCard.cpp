@@ -1,3 +1,7 @@
+/**
+ *  @author: wpengae
+ */
+ 
 #include "DrawFourCard.h"
 #include "Player.h"
 

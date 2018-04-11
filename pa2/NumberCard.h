@@ -2,7 +2,7 @@
  * NumberCard.h
  *
  *  Created on: Jan 29, 2018
- *      Author: kevinw
+ *      Author: kevinw, wpengae
  */
 
 #ifndef NUMBERCARD_H_
