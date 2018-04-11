@@ -14,6 +14,8 @@ class ReverseCard : public Card {
 public:
     ReverseCard(Color color);
     
+    virtual bool operator^(const Card &following_card) const override;
+    
     virtual void castEffect(Player *&currentPlayer, CardPile &drawPile, CardPile &discardPile) override;
 
 protected:

@@ -10,7 +10,6 @@
 
 #include <string>
 #include <iostream>
-#include <typeinfo>
 
 #include "enumAndConst.h"
 
@@ -19,9 +18,6 @@ using namespace std;
 class CardPile;
 
 class Player;
-
-#endif /* CARD_H_ */
-
 
 class Card {
     
@@ -43,7 +39,7 @@ public:
      *  1. Judging if playing the card is valid
      *  2. Removing the card from the player's hand
      *  3. Casting the effect of the card (castEffect() here)
-     *  4. Adding the card to the discard pile and becoming the top-card
+     *  4. Adding the card to the discardPile and becoming the top-card
      */
     virtual void castEffect(Player *&currentPlayer, CardPile &drawPile, CardPile &discardPile) = 0;
     
@@ -67,3 +63,5 @@ private:
     const int point;
     
 };
+
+#endif /* CARD_H_ */

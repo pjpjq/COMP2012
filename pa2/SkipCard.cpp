@@ -10,8 +10,14 @@
 
 SkipCard::SkipCard(Color color) : Card(color, POINT_SKIPCARD) {}
 
+bool SkipCard::operator^(const Card &following_card) const {
+    return Card::operator^(following_card) || typeid(following_card).name() == typeid(*this).name();
+}
+
 void SkipCard::castEffect(Player *&currentPlayer, CardPile &drawPile, CardPile &discardPile) {
-    // TODO: Add skip next player effect
+    if (!currentPlayer) { return; }
+    /* Skips the next player by moving one player forward. */
+    currentPlayer = currentPlayer->getNextPlayer();
 }
 
 void SkipCard::serialize(ostream &os) const {

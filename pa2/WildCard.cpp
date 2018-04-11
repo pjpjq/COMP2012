@@ -11,10 +11,8 @@
 WildCard::WildCard() : Card(Color::meta, POINT_WILDCARD) {}
 
 bool WildCard::operator^(const Card &following_card) const {
-    // TODO: Add wildCard following policy
-    if (!played) {
-        return false;
-    }
+    /* Must have played WildCard so that it can be followed by another card... */
+    return played && Card::operator^(following_card);
 }
 
 void WildCard::castEffect(Player *&currentPlayer, CardPile &drawPile, CardPile &discardPile) {
@@ -24,6 +22,7 @@ void WildCard::castEffect(Player *&currentPlayer, CardPile &drawPile, CardPile &
 void WildCard::init() {
     /* Shuffled wildCard becomes meta. */
     color = Color::meta;
+    played = false;
 }
 
 WildCard::WildCard(int point) : Card(Color::meta, point) {}
