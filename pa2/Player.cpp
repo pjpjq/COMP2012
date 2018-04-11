@@ -44,8 +44,9 @@ void Player::drawCard(CardPile &drawPile, CardPile &discardPile, int number_of_c
 }
 
 Card *Player::playCardAfter(const Card *topCard, int index) {
-    if (!(*topCard ^ *getCard(index)) || index >= getSize()) {
-        /* Invalid card */
+    const Card *cardToPlay = getCard(index);
+    if (!cardToPlay || !(*topCard ^ *cardToPlay)) {
+        /* Invalid Card */
         return nullptr;
     }
     return removeCard(index);
