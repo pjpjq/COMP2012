@@ -6,7 +6,7 @@
  */
 
 #include "Player.h"
-
+#include <typeinfo>
 ostream &operator<<(ostream &os, const Player &h) {
     os << h.name << ":";
     for (int i = 0; i < h.getSize(); i++) {
@@ -47,6 +47,10 @@ Card *Player::playCardAfter(const Card *topCard, int index) {
     const Card *cardToPlay = getCard(index);
     if (!cardToPlay || !(*topCard ^ *cardToPlay) || index >= getSize()) {
         /* Invalid Card */
+        return nullptr;
+    }
+    if (typeid(*cardToPlay).name() != typeid(NumberCard).name() && getSize() == 1) {
+        /* You cannot play a function card as the last card! */
         return nullptr;
     }
     return removeCard(index);

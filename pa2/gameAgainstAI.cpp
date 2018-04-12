@@ -14,10 +14,38 @@
 
 using namespace std;
 
+class Agent : public Player {
+public:
+    Agent(string s, Player *a = nullptr) : Player(s, a) {
+        srand(time(nullptr));
+    }
+    
+    virtual bool appealDrawFour() const {
+        bool appeal = rand() % 2;
+        printf("The next agent ");
+        if (appeal) {
+            printf("appealed!\n");
+        } else {
+            printf("didn't appeal...\n");
+        }
+        return appeal;
+    }
+    
+    virtual Color chooseColor() const {
+        
+        int randomChoice = rand() % 4;
+        return randomChoice == 0 ? Color::blue :
+               randomChoice == 1 ? Color::green :
+               randomChoice == 2 ? Color::red :
+               Color::yellow;
+    }
+};
+
 int main() {
     CardPile drawPile;
     CardPile discardPile;
-    srand(1);
+    
+    srand(time(nullptr));
     
     for (int i = 0; i < 8; ++i) {
         drawPile += new NumberCard(i, Color::red);
@@ -71,7 +99,7 @@ int main() {
     /* Circular linked list. */
     players[0] = new Player(PLAYER_NAMES[0]);
     for (int i = 1; i < numOfAgents + 1; ++i) {
-        players[i] = new Player(PLAYER_NAMES[i], players[i - 1]);
+        players[i] = new Agent(PLAYER_NAMES[i], players[i - 1]);
     }
     
     /* Ready... go! Every player draw 5 cards first. */
@@ -102,7 +130,7 @@ int main() {
                     if (cardToPlay) {
                         cout << "You played: " << *cardToPlay << endl;
                     } else {
-                        cout << "What are you doing man? Read how to play the card!" << endl;
+                        cout << "Invalid input, please try again" << endl;
                     }
                 }
                 ++numOfInputFailures;
@@ -125,7 +153,7 @@ int main() {
             for (int i = 0; i < 30; ++i) { /* Well, the agent is too lazy to check cards indexed >= 30... */
                 cardToPlay = currentPlayer->playCardAfter(topCard, i);
                 if (cardToPlay) {
-                    printf("AI Player %d played: ", agentIndex);
+                    printf("Agent %d played: ", agentIndex);
                     cout << *cardToPlay << endl;
                     cardToPlay->castEffect(currentPlayer, drawPile, discardPile);
                     topCard = cardToPlay;
@@ -135,19 +163,24 @@ int main() {
             }
             if (!cardToPlay) {
                 currentPlayer->drawCard(drawPile, discardPile, 1);
+                printf("Agent %d drew one card...\n", agentIndex);
             }
         }
         
         currentPlayer = currentPlayer->getNextPlayer();
         
         /* Checks if the game is over. */
+        cout << "Current hands of all players:" << endl << endl;
         for (int i = 0; i < numOfAgents + 1; ++i) {
-//            cout << *players[i] << endl;
+            cout << *players[i] << endl;
             gameOver |= players[i]->win();
         }
+        cout << "-----------------------------" << endl;
     }
     
     /* Prints the result. */
+    cout << "==================================" << endl;
+    cout << "GAME OVER!" << endl;
     if (players[0]->win()) {
         cout << "Congratulations, you win!" << endl;
     }

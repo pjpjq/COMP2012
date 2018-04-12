@@ -10,12 +10,13 @@ void DrawFourCard::castEffect(Player *&currentPlayer, CardPile &drawPile, CardPi
     if (!currentPlayer || !currentPlayer->getNextPlayer()) {
         return;
     }
+    Color newColor = currentPlayer->chooseColor();
     /* Current player chooses color first, then asks if next player'd appeal. */
-    color = currentPlayer->chooseColor();
     if (currentPlayer->getNextPlayer()->appealDrawFour()) {
         bool legal = true;
         for (int i = 0; i < currentPlayer->getSize(); ++i) {
-            if (typeid(currentPlayer->getCard(i)).name() != typeid(DrawFourCard).name()) {
+            if (typeid(currentPlayer->getCard(i)).name() != typeid(DrawFourCard).name() &&
+                (*(discardPile.getTopCard()) ^ *(currentPlayer->getCard(i)))) {
                 /* Has another card to play! */
                 legal = false;
                 break;
@@ -31,6 +32,7 @@ void DrawFourCard::castEffect(Player *&currentPlayer, CardPile &drawPile, CardPi
         currentPlayer->getNextPlayer()->drawCard(drawPile, discardPile, 4);
         currentPlayer = currentPlayer->getNextPlayer();
     }
+    color = newColor;
 }
 
 void DrawFourCard::serialize(ostream &os) const {
