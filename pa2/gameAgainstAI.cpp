@@ -150,6 +150,7 @@ int main() {
                     agentIndex = i;
                 }
             }
+//            cardToPlay = nullptr; // uncomment this and comment the following for-loop to make a drawing machine...
             for (int i = 0; i < 30; ++i) { /* Well, the agent is too lazy to check cards indexed >= 30... */
                 cardToPlay = currentPlayer->playCardAfter(topCard, i);
                 if (cardToPlay) {
