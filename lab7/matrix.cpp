@@ -13,10 +13,11 @@ bool print_step{false};
  * @param num_cols the number of columns
  */
 Matrix::Matrix(int num_rows, int num_cols) : num_rows(num_rows), num_cols(num_cols) {
-    if (print_step) cout << "constructor" << endl;
+    if (print_step) { cout << "constructor" << endl; }
     ptr = new int[num_rows * num_cols];
-    for (int i = 0; i < num_rows * num_cols; i++)
+    for (int i = 0; i < num_rows * num_cols; i++) {
         ptr[i] = 0;
+    }
 }
 
 /**
@@ -27,18 +28,20 @@ Matrix::Matrix(int num_rows, int num_cols) : num_rows(num_rows), num_cols(num_co
  * @param num_cols the number of columns
  */
 Matrix::Matrix(int *data, int num_rows, int num_cols) : num_rows(num_rows), num_cols(num_cols) {
-    if (print_step) cout << "constructor" << endl;
+    if (print_step) { cout << "constructor" << endl; }
     ptr = new int[num_rows * num_cols];
-    for (int i = 0; i < num_rows * num_cols; i++)
+    for (int i = 0; i < num_rows * num_cols; i++) {
         ptr[i] = data[i];
+    }
 }
 
 /**
  * Destructor
  */
 Matrix::~Matrix() {
-    if (ptr != nullptr)
+    if (ptr != nullptr) {
         delete[] ptr;
+    }
 }
 
 /**
@@ -47,8 +50,8 @@ Matrix::~Matrix() {
  * @param mat
  */
 Matrix::Matrix(const Matrix &mat) {
-    if (print_step) cout << "copy constructor" << endl;     // please keep this line
-
+    if (print_step) { cout << "copy constructor" << endl; }     // please keep this line
+    
 }
 
 /**
@@ -57,8 +60,8 @@ Matrix::Matrix(const Matrix &mat) {
  * @param mat
  */
 Matrix::Matrix(Matrix &&mat) {
-    if (print_step) cout << "move constructor" << endl;     // please keep this line
-
+    if (print_step) { cout << "move constructor" << endl; }     // please keep this line
+    
 }
 
 /**
@@ -66,9 +69,9 @@ Matrix::Matrix(Matrix &&mat) {
  * TODO: To be implemented in Task 1
  * @param mat
  */
-const Matrix& Matrix::operator=(const Matrix &mat) {
-    if (print_step) cout << "operator =" << endl;     // please keep this line
-
+const Matrix &Matrix::operator=(const Matrix &mat) {
+    if (print_step) { cout << "operator =" << endl; }     // please keep this line
+    
 }
 
 /**
@@ -76,9 +79,9 @@ const Matrix& Matrix::operator=(const Matrix &mat) {
  * TODO: To be implemented in Task 1
  * @param mat
  */
-const Matrix& Matrix::operator=(Matrix &&mat) {
-    if (print_step) cout << "move operator =" << endl;     // please keep this line
-
+const Matrix &Matrix::operator=(Matrix &&mat) {
+    if (print_step) { cout << "move operator =" << endl; }     // please keep this line
+    
 }
 
 /**
@@ -88,8 +91,8 @@ const Matrix& Matrix::operator=(Matrix &&mat) {
  * @return
  */
 Matrix Matrix::operator+(const Matrix &mat) {
-    if (print_step) cout << "operator +" << endl;     // please keep this line
-
+    if (print_step) { cout << "operator +" << endl; }     // please keep this line
+    
 }
 
 /**
@@ -98,9 +101,9 @@ Matrix Matrix::operator+(const Matrix &mat) {
  * @param mat the rvalue reference of another Matrix
  * @return
  */
-Matrix& Matrix::operator+(Matrix &&mat) {
-    if (print_step) cout << "operator + for rvalue" << endl;     // please keep this line
-
+Matrix &Matrix::operator+(Matrix &&mat) {
+    if (print_step) { cout << "operator + for rvalue" << endl; }     // please keep this line
+    
 }
 
 /**
@@ -118,7 +121,7 @@ void Matrix::print() const {
         cout << (i == 0 ? "[" : " ");
         for (int j = 0; j < num_cols; j++) {
             cout << ptr[i * num_cols + j];
-            if (j != num_cols - 1) cout << ", ";
+            if (j != num_cols - 1) { cout << ", "; }
         }
         cout << (i == num_rows - 1 ? "]" : ";");
         cout << endl;
