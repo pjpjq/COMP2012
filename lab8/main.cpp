@@ -15,7 +15,7 @@ using std::endl;
 // Return the sum of area of r and s.
 // 
 double area_sum(const Rectangle &r, const Square &s) {
-    return 0.0;
+    return r.area() + s.area();
 }
 
 int main() {
@@ -32,11 +32,11 @@ int main() {
     // Part 2
     //
     // Uncomment the following after you finished part 1
-    // TestRectangle test_rectangle;
-    // test_rectangle.run();
+    TestRectangle test_rectangle;
+    test_rectangle.run();
     
-    // TestSquare test_square;
-    // test_square.run();
+    TestSquare test_square;
+    test_square.run();
     
     cout << "Part 3" << endl;
     
@@ -46,14 +46,15 @@ int main() {
     // Your code for part 3
     
     // Print the info for SlowLib
-    
+    SlowLib::print_info();
     // Create an iterator from SlowLib, then call the next() function
+    SlowLib::Iterator().next();
     
     
     // Print the info for FastLib
-    
+    FastLib::print_info();
     // Create an iterator from FastLib, then call the next() function
-    
+    FastLib::Iterator().next();
     
     return 0;
 }

@@ -4,6 +4,11 @@
 #include "common.h"
 
 class Rectangle {
+    
+    friend double area_sum(const Rectangle &r, const Square &s);
+    
+    friend class TestRectangle;
+
 public:
     Rectangle(double x, double y, double x_len, double y_len) : x(x), y(y), x_len(x_len), y_len(y_len) {};
 
