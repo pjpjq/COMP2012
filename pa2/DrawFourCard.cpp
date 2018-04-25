@@ -15,7 +15,7 @@ void DrawFourCard::castEffect(Player *&currentPlayer, CardPile &drawPile, CardPi
     if (currentPlayer->getNextPlayer()->appealDrawFour()) {
         bool legal = true;
         for (int i = 0; i < currentPlayer->getSize(); ++i) {
-            if (typeid(currentPlayer->getCard(i)).name() != typeid(DrawFourCard).name() &&
+            if (typeid( *(currentPlayer->getCard(i)) ).name() != typeid(DrawFourCard).name() &&
                 (*(discardPile.getTopCard()) ^ *(currentPlayer->getCard(i)))) {
                 /* Has another card to play! */
                 legal = false;
