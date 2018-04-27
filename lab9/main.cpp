@@ -3,6 +3,7 @@
 #include <sstream>
 #include "BST.h"
 #include "BSTExercises.h"
+
 using namespace std;
 
 /*
@@ -16,94 +17,99 @@ using namespace std;
  *   Output
  *   The decoded message.
  */
-string decode_message(const BST<int, char>& bst, const string& encoded_message, char word_delim='/', char char_delim=' ') {
-	// Example: The original message is "AB CD".
-	//      	A => .-
-	// 			B => -...
-	// 		   AB => .- -...
-	//          C => -.-.
-	//          D => -..
-	// 		   CD => -.-. -..
-	// 		AB CD => .- -.../-.-. -..
-	// 			Then, the encoded message is ".- -.../-.-. -..".
-
-	stringstream ss(encoded_message);
-	string decoded_message, symbols, symbol;
-	while (getline(ss, symbols, word_delim)) {
-		// Here we split the encoded_message by '/'. In the first iteration,  symbols = ".- -..."
-		//											 In the second iteration, symbols = "-.-. -.."
-		stringstream ss_(symbols);
-		while (getline(ss_, symbol, char_delim))
-			// Here we split the symbols by ' '.
-			// The variable symbol will be the morse code symbols (i.e., ".-", "-...", "-.-.", "-..") in the encoded_message,
-			// and you are going to decode it in the following line.
-			decoded_message += decode(bst, symbol);
-		decoded_message += ' ';
-	}
-	return decoded_message;
+string
+decode_message(const BST<int, char> &bst, const string &encoded_message, char word_delim = '/', char char_delim = ' ') {
+    // Example: The original message is "AB CD".
+    //      	A => .-
+    // 			B => -...
+    // 		   AB => .- -...
+    //          C => -.-.
+    //          D => -..
+    // 		   CD => -.-. -..
+    // 		AB CD => .- -.../-.-. -..
+    // 			Then, the encoded message is ".- -.../-.-. -..".
+    
+    stringstream ss(encoded_message);
+    string decoded_message, symbols, symbol;
+    while (getline(ss, symbols, word_delim)) {
+        // Here we split the encoded_message by '/'. In the first iteration,  symbols = ".- -..."
+        //											 In the second iteration, symbols = "-.-. -.."
+        stringstream ss_(symbols);
+        while (getline(ss_, symbol, char_delim)) {
+            // Here we split the symbols by ' '.
+            // The variable symbol will be the morse code symbols (i.e., ".-", "-...", "-.-.", "-..") in the encoded_message,
+            // and you are going to decode it in the following line.
+            decoded_message += decode(bst, symbol);
+        }
+        decoded_message += ' ';
+    }
+    return decoded_message;
 }
 
 int main() {
-	cout << "======================================" << endl;
-	cout << "Part A: Implementation" << endl;
-	cout << "======================================" << endl;
-
-	BST<int, char> bst_a;
-	cout << "Tree:" << endl;
-	bst_a.print();
-	cout << boolalpha << "isBalanced : " << isBalanced(bst_a) << endl;
-	cout << "diameter : " << diameter(bst_a) << endl;
-	cout << "**************************************" << endl;
-
-	bst_a.insert(5, 'a');
-	bst_a.insert(10, 'b');
-	cout << "Tree:" << endl;
-	bst_a.print();
-	cout << boolalpha << "isBalanced : " << isBalanced(bst_a) << endl;
-	cout << "diameter : " << diameter(bst_a) << endl;
-	cout << "**************************************" << endl;
-
-	bst_a.insert(15, 'c');
-	bst_a.insert(2, 'd');
-	cout << "Tree:" << endl;
-	bst_a.print();
-	cout << boolalpha << "isBalanced : " << isBalanced(bst_a) << endl;
-	cout << "diameter : " << diameter(bst_a) << endl;
-	cout << "**************************************" << endl;
-
-	bst_a.insert(30, 'e');
-	bst_a.insert(3, 'f');
-	bst_a.insert(1, 'g');
-	bst_a.insert(0, 'h');
-
-	cout << "Tree:" << endl;
-	bst_a.print();
-	cout << boolalpha << "isBalanced : " << isBalanced(bst_a) << endl;
-	cout << "diameter : " << diameter(bst_a) << endl;
-
-
-	cout << endl << endl;
-	cout << "======================================" << endl;
-	cout << "Part B: Morse Code Decoder " << endl;
-	cout << "======================================" << endl;
+    cout << "======================================" << endl;
+    cout << "Part A: Implementation" << endl;
+    cout << "======================================" << endl;
+    
+    BST<int, char> bst_a;
+    cout << "Tree:" << endl;
+    bst_a.print();
+    cout << boolalpha << "isBalanced : " << isBalanced(bst_a) << endl;
+    cout << "diameter : " << diameter(bst_a) << endl;
+    cout << "**************************************" << endl;
+    
+    bst_a.insert(5, 'a');
+    bst_a.insert(10, 'b');
+    cout << "Tree:" << endl;
+    bst_a.print();
+    cout << boolalpha << "isBalanced : " << isBalanced(bst_a) << endl;
+    cout << "diameter : " << diameter(bst_a) << endl;
+    cout << "**************************************" << endl;
+    
+    bst_a.insert(15, 'c');
+    bst_a.insert(2, 'd');
+    cout << "Tree:" << endl;
+    bst_a.print();
+    cout << boolalpha << "isBalanced : " << isBalanced(bst_a) << endl;
+    cout << "diameter : " << diameter(bst_a) << endl;
+    cout << "**************************************" << endl;
+    
+    bst_a.insert(30, 'e');
+    bst_a.insert(3, 'f');
+    bst_a.insert(1, 'g');
+    bst_a.insert(0, 'h');
+    
+    cout << "Tree:" << endl;
+    bst_a.print();
+    cout << boolalpha << "isBalanced : " << isBalanced(bst_a) << endl;
+    cout << "diameter : " << diameter(bst_a) << endl;
+    
+    
+    cout << endl << endl;
+    cout << "======================================" << endl;
+    cout << "Part B: Morse Code Decoder " << endl;
+    cout << "======================================" << endl;
     BST<int, char> bst_b;
-
-	/****** START YOUR IMPLEMENTATION FOR PART B1 HERE ******/
-
-
-
-	/******* END YOUR IMPLEMENTATION FOR PART B1 HERE *******/
+    
+    /****** START YOUR IMPLEMENTATION FOR PART B1 HERE ******/
+    int keys[] = {14, 7, 22, 4, 10, 18, 26, 2, 6, 9, 12, 16, 20, 24, 27, 1, 3, 5, 8, 11, 13, 15, 17, 19, 21, 23, 25};
+    string vals = "*ETIANMSURWDKGOHVFLPJBXCYZQ";
+    for (int i = 0; i < 27; ++i) {
+        bst_b.insert(keys[i], vals[i]);
+    }
+    /******* END YOUR IMPLEMENTATION FOR PART B1 HERE *******/
     bst_b.print();
-	cout << boolalpha << "isBalanced : " << isBalanced(bst_b) << endl;
-	cout << "diameter : " << diameter(bst_b) << endl << endl;
-
-    string message_1("- .... .. .../.. .../- .... ./.-.. .- ... -/.-.. .- -.../.. -./- .... .. .../-.-. --- ..- .-. ... .");
+    cout << boolalpha << "isBalanced : " << isBalanced(bst_b) << endl;
+    cout << "diameter : " << diameter(bst_b) << endl << endl;
+    
+    string message_1(
+            "- .... .. .../.. .../- .... ./.-.. .- ... -/.-.. .- -.../.. -./- .... .. .../-.-. --- ..- .-. ... .");
     cout << decode_message(bst_b, message_1) << endl;
-
+    
     string message_2("- .... .- -. -.-/-.-- --- ..-/... ---/-- ..- -.-. ....");
-	cout << decode_message(bst_b, message_2) << endl;
-
-	string message_3("--. --- --- -../.-.. ..- -.-. -.-/.-- .. - ..../-.-- --- ..- .-./. -..- .- -- ...");
-	cout << decode_message(bst_b, message_3) << endl;
-
+    cout << decode_message(bst_b, message_2) << endl;
+    
+    string message_3("--. --- --- -../.-.. ..- -.-. -.-/.-- .. - ..../-.-- --- ..- .-./. -..- .- -- ...");
+    cout << decode_message(bst_b, message_3) << endl;
+    
 }
