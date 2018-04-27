@@ -9,10 +9,10 @@
 // number of nodes on the longest downward path between the root and
 // a leaf.
 template <typename KT, typename VT>
-int treeHeight(const BST<KT, VT>& bst) {
-	if (bst.is_empty()) return 0;
-
-	return 1 + max(treeHeight(bst.root->left), treeHeight(bst.root->right));
+int treeHeight(const BST<KT, VT> &bst) {
+    if (bst.is_empty()) { return 0; }
+    
+    return 1 + max(treeHeight(bst.root->left), treeHeight(bst.root->right));
 }
 
 // Determine whether the binary tree is balanced. An empty tree is
@@ -24,12 +24,15 @@ int treeHeight(const BST<KT, VT>& bst) {
 //     3) the difference between heights of left subtree and right subtree
 //		  is not more than 1
 template <typename KT, typename VT>
-bool isBalanced(const BST<KT, VT>& bst) {
-	/****** START YOUR IMPLEMENTATION FOR PART A1 HERE ******/
-
-	return false;
-
-	/******* END YOUR IMPLEMENTATION FOR PART A1 HERE *******/
+bool isBalanced(const BST<KT, VT> &bst) {
+    /****** START YOUR IMPLEMENTATION FOR PART A1 HERE ******/
+    if (bst.is_empty()) {
+        return true;
+    }
+    return isBalanced(bst.root->left) && isBalanced(bst.root->right) &&
+           abs(treeHeight(bst.root->left) - treeHeight(bst.root->right)) <= 1;
+    
+    /******* END YOUR IMPLEMENTATION FOR PART A1 HERE *******/
 }
 
 // Calculate the number of nodes on the longest path between two leaves.
@@ -39,24 +42,37 @@ bool isBalanced(const BST<KT, VT>& bst) {
 //     3) the longest path between leaves that goes through the root of the tree
 //        (HINT: You can compute it using the heights of the subtrees)
 template <typename KT, typename VT>
-int diameter(const BST<KT, VT>& bst) {
-	/****** START YOUR IMPLEMENTATION FOR PART A2 HERE ******/
-
-	return 0;
-
-	/****** START YOUR IMPLEMENTATION FOR PART A2 HERE ******/
+int diameter(const BST<KT, VT> &bst) {
+    /****** START YOUR IMPLEMENTATION FOR PART A2 HERE ******/
+    if (bst.is_empty()) {
+        return 0;
+    }
+    return treeHeight(bst.root->left) + treeHeight(bst.root->right) + 1;
+    
+    /****** START YOUR IMPLEMENTATION FOR PART A2 HERE ******/
 }
 
 // Decode the morse code symbol. You can use an asterisk (*) to be the
 // default result (you need to return something when you encounter an
 // error such as syntax error or empty bst although they will not occur
 // under our assumptions).
-char decode(const BST<int, char>& bst, const string& symbol, unsigned int index = 0) {
-	/****** START YOUR IMPLEMENTATION FOR PART B2 HERE ******/
-
-	return '*';
-
-	/******* END YOUR IMPLEMENTATION FOR PART B2 HERE *******/
+char decode(const BST<int, char> &bst, const string &symbol, unsigned int index = 0) {
+    /****** START YOUR IMPLEMENTATION FOR PART B2 HERE ******/
+    if (index > symbol.size() || bst.is_empty()) { /* Index out of range! */
+        return '*';
+    }
+    if (index == symbol.size()) {
+        return bst.root->value;
+    }
+    if (symbol[index] == '-') {
+        return decode(bst.root->right, symbol, index + 1);
+    } else if (symbol[index] == '.') {
+        return decode(bst.root->left, symbol, index + 1);
+    } else {
+        return '*';
+    }
+    
+    /******* END YOUR IMPLEMENTATION FOR PART B2 HERE *******/
 }
 
 #endif /* BSTEXERCISES_H_ */
