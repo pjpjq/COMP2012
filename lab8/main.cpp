@@ -55,6 +55,5 @@ int main() {
     FastLib::print_info();
     // Create an iterator from FastLib, then call the next() function
     FastLib::Iterator().next();
-    
     return 0;
 }
