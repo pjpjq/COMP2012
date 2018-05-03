@@ -81,8 +81,8 @@ public:
     virtual void print(ostream &os) const override;
     
     //print the tree to the console
-    //note that displayed tree is rotated 90 degree clockwise
-    //given; do not modify
+    //note that displayed tree is rotated 90 degree clockwise given;
+    // do not modify
     void printTree(int depth = 0) const {
         if (isEmpty()) {
             return;
