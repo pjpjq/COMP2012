@@ -1,7 +1,3 @@
-#include "smartArray.h" // Include only for syntax correction
-#include "pair.h"       // Include only for syntax correction
-#include <iostream>
-
 // submit this file
 // you do NOT need to include any header in this file
 // just write your SmartArray implementation here right away
@@ -36,10 +32,10 @@ bool SmartArray<KeyType, ValueType>::add(KeyType key, ValueType value) {
     for (int i = 0; i < new_pair_pos; ++i) {
         new_data[i] = new Pair<KeyType, ValueType>{*(data[i])};
     }
+    new_data[new_pair_pos] = new Pair<KeyType, ValueType>(key, value);
     for (int i = new_pair_pos + 1; i < size + 1; ++i) {
         new_data[i] = new Pair<KeyType, ValueType>{*(data[i - 1])};
     }
-    new_data[new_pair_pos] = new Pair<KeyType, ValueType>(key, value);
     
     /* Deletes the original data array. */
     for (int i = 0; i < size; ++i) {
@@ -98,6 +94,7 @@ ValueType SmartArray<KeyType, ValueType>::get(KeyType key) const {
             return data[i]->value;
         }
     }
+    return ValueType();
 }
 
 template <typename KeyType, typename ValueType>
@@ -110,7 +107,6 @@ const Pair<KeyType, ValueType> *SmartArray<KeyType, ValueType>::operator[](int n
     if (n < 0 || n >= size) { /* Index out of range */
         return nullptr;
     }
-    
     return data[n];
 }
 

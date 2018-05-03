@@ -33,7 +33,7 @@ int main() {
     cout << endl;
     ostringstream sout;
     //note: ostringstream can be used like a "cout", but the output does not go to the console/screen
-    //the output goes to a undlying string, which can be retrieved with the "str()" member function of it
+    //the output goes to a underlying string, which can be retrieved with the "str()" member function of it
     //ostringstream is used here to verify/compare your operator<< output with the model answer
     sout << *bst; //this invokes operator<< ( sout, (*bst) )
     string studentAnswer = sout.str();
