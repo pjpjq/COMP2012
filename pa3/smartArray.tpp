@@ -22,6 +22,7 @@ bool SmartArray<KeyType, ValueType>::add(KeyType key, ValueType value) {
     if (has(key)) {
         return false;
     }
+    
     /* Finds the position for the new pair. */
     int new_pair_pos = 0;
     for (int i = 0; i < size; ++i) {
@@ -29,6 +30,7 @@ bool SmartArray<KeyType, ValueType>::add(KeyType key, ValueType value) {
             new_pair_pos = i;
         }
     }
+    
     /* Constructs the new_data array. */
     Pair<KeyType, ValueType> **new_data = new Pair<KeyType, ValueType> *[size + 1];
     for (int i = 0; i < new_pair_pos; ++i) {
@@ -38,10 +40,13 @@ bool SmartArray<KeyType, ValueType>::add(KeyType key, ValueType value) {
         new_data[i] = new Pair<KeyType, ValueType>{*(data[i - 1])};
     }
     new_data[new_pair_pos] = new Pair<KeyType, ValueType>(key, value);
+    
     /* Deletes the original data array. */
     for (int i = 0; i < size; ++i) {
         delete data[i];
     }
+    delete data;
+    
     /* Points to the new_data. */
     data = new_data;
     ++size;
@@ -53,6 +58,7 @@ bool SmartArray<KeyType, ValueType>::remove(KeyType key) {
     if (!has(key)) {
         return false;
     }
+    
     /* Finds the position for the new pair. */
     int old_pair_pos = 0;
     for (int i = 0; i < size; ++i) {
@@ -60,6 +66,7 @@ bool SmartArray<KeyType, ValueType>::remove(KeyType key) {
             old_pair_pos = i;
         }
     }
+    
     /* Constructs the new_data array. */
     Pair<KeyType, ValueType> **new_data = new Pair<KeyType, ValueType> *[size - 1];
     for (int i = 0; i < old_pair_pos; ++i) {
@@ -68,6 +75,13 @@ bool SmartArray<KeyType, ValueType>::remove(KeyType key) {
     for (int i = old_pair_pos; i < size - 1; ++i) {
         new_data[i] = new Pair<KeyType, ValueType>{*(data[i + 1])};
     }
+    
+    /* Deletes the original data array. */
+    for (int i = 0; i < size; ++i) {
+        delete data[i];
+    }
+    delete data;
+    
     /* Points to the new_data.*/
     data = new_data;
     --size;
