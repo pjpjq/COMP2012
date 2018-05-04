@@ -7,87 +7,102 @@ BST<KeyType, ValueType>::BST(const BST &another) {
     if (another.isEmpty()) {
         return;
     }
+    
+    /* Recursively copy from the root. */
     root = new BSTNode<KeyType, ValueType>(*another.root);
 }
 
 template <typename KeyType, typename ValueType>
 bool BST<KeyType, ValueType>::isEmpty() const {
+    /* Empty iff no node at all. */
     return !root;
 }
 
 template <typename KeyType, typename ValueType>
 const BST<KeyType, ValueType> *BST<KeyType, ValueType>::findMin() const {
+    /* Returns nullptr if the tree is empty. */
     if (isEmpty()) {
         return nullptr;
     }
+    
+    /* Returns itself if only 1 node. */
     if (count() == 1) {
         return this;
     }
-    /* Count() >= 2. */
-    const BST<KeyType, ValueType> *tree_root = &leftSubtree();
-    while (tree_root->count() > 1) {
-        tree_root = &tree_root->leftSubtree();
-    }
-    return tree_root;
+    
+    /* When size >= 2, find the min of the left subtree. */
+    return leftSubtree().findMin();
 }
 
 template <typename KeyType, typename ValueType>
 const BST<KeyType, ValueType> &BST<KeyType, ValueType>::rightSubtree() const {
-//    return root ? root->right : BST();
+    /**
+     * Assuming the root is not nullptr when calling rightSubtree().
+     */
     return root->right;
 }
 
 template <typename KeyType, typename ValueType>
 const BST<KeyType, ValueType> &BST<KeyType, ValueType>::leftSubtree() const {
-//    return root ? root->left : BST();
+    /**
+     * Assuming the root is not nullptr when calling leftSubtree().
+     */
     return root->left;
 }
 
 template <typename KeyType, typename ValueType>
 bool BST<KeyType, ValueType>::add(KeyType key, ValueType value) {
+    //TODO: handle int type
 //    if (typeid(ValueType) == typeid(int)) {
 //        if (get(key) != 0) { return false; }
 //    } else {
-    if (get(key) != ValueType()) { return false; }
+    if (get(key) != ValueType()) { /* Duplicate key, cannot add. */
+        return false;
+    }
 //    }
     
     if (isEmpty()) {
         root = new BSTNode<KeyType, ValueType>(key, value);
-    } else if (key < root->data.key) {
+    } else if (key < root->data.key) { /* Adds smaller key to the left subtree. */
         root->left.add(key, value);
-    } else {
+    } else { /* Adds larger key to the right subtree. */
         root->right.add(key, value);
     }
+    
+    /* Updates the size after adding a node. */
     ++size;
     return true;
 }
 
 template <typename KeyType, typename ValueType>
 bool BST<KeyType, ValueType>::remove(KeyType key) {
+    //TODO: handle int type
 //    if (typeid(ValueType) == typeid(int)) {
 //        if (get(key) == 0) { return false; }
 //    } else {
-    if (get(key) == ValueType()) { return false; }
+    if (get(key) == ValueType()) { /* default value means not found, cannot remove the key. */
+        return false;
+    }
 //    }
     
     if (key < root->data.key) {
         root->left.remove(key);
     } else if (key > root->data.key) {
         root->right.remove(key);
-    } else { /* Deletes the root. */
-        if (root->left.isEmpty()) {
-            BSTNode <KeyType, ValueType> *new_root = root->right.root;
-            delete root;
-            root = new_root;
-        } else if (root->right.isEmpty()) {
-            BSTNode <KeyType, ValueType> *new_root = root->left.root;
-            delete root;
-            root = new_root;
+    } else { /* Deletes the not-nullptr root. */
+        if (root->left.isEmpty() || root->right.isEmpty()) {
+            BSTNode <KeyType, ValueType> *deleting_root = root;
+            root = root->right.isEmpty() ? root->left.root : root->right.root;
+            deleting_root->left.root = deleting_root->right.root = nullptr;
+            delete deleting_root;
         } else { /* Has 2 subtrees. */
-            root->data = root->right.findMin()->root->data;
+            /* Copies the data of min of right subtree to the root and removes the node. */
+            root->data = rightSubtree().findMin()->root->data;
             root->right.remove(root->data.key);
         }
     }
+    
+    /* Updates the size after removing the key. */
     --size;
     return true;
 }
@@ -104,6 +119,8 @@ ValueType BST<KeyType, ValueType>::get(KeyType key) const {
             node = node->right.root;
         }
     }
+    
+    /* Cannot get the key, returns the default special value. */
     return typeid(ValueType) == typeid(int) ? 0 : ValueType();
 }
 
@@ -122,14 +139,14 @@ int BST<KeyType, ValueType>::height() const {
 
 template <typename KeyType, typename ValueType>
 const Pair<KeyType, ValueType> *BST<KeyType, ValueType>::operator[](int n) const {
-    if (n < 0 || n >= size) {
+    if (n < 0 || n >= size) { /* Index is out of range. */
         return nullptr;
     }
-    if (n == root->left.count()) {
+    if (n == root->left.count()) { /* The root has the (n+1)th smallest key. */
         return &root->data;
-    } else if (n < root->left.count()) { /* Node is in the left subtree. */
+    } else if (n < root->left.count()) { /* The node is in the left subtree. */
         return root->left[n];
-    } else { /* Node is in the right subtree. */
+    } else { /* The node is in the right subtree. */
         return root->right[n - root->left.count() - 1];
     }
 }
@@ -137,6 +154,6 @@ const Pair<KeyType, ValueType> *BST<KeyType, ValueType>::operator[](int n) const
 template <typename KeyType, typename ValueType>
 void BST<KeyType, ValueType>::print(ostream &os) const {
     for (int i = 0; i < size; ++i) {
-        os << "(" << this->operator[](i)->key << "," << this->operator[](i)->value << ")";
+        os << "(" << operator[](i)->key << "," << operator[](i)->value << ")";
     }
 }
