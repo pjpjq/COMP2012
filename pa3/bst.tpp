@@ -24,14 +24,18 @@ const BST<KeyType, ValueType> *BST<KeyType, ValueType>::findMin() const {
     if (isEmpty()) {
         return nullptr;
     }
-    
-    /* Returns itself if only 1 node. */
-    if (count() == 1) {
-        return this;
+//    /* Returns itself if only 1 node. */
+//    if (count() == 1) {
+//        return this;
+//    }
+//
+//    /* When size >= 2, find the min of the left subtree. */
+//    return leftSubtree().findMin();
+    const BST<KeyType, ValueType> *bst_ptr = this;
+    while (!bst_ptr->leftSubtree().isEmpty()) {
+        bst_ptr = &bst_ptr->leftSubtree();
     }
-    
-    /* When size >= 2, find the min of the left subtree. */
-    return leftSubtree().findMin();
+    return bst_ptr;
 }
 
 template <typename KeyType, typename ValueType>
@@ -97,7 +101,7 @@ bool BST<KeyType, ValueType>::remove(KeyType key) {
             delete deleting_root;
         } else { /* Has 2 subtrees. */
             /* Copies the data of min of right subtree to the root and removes the node. */
-            root->data = rightSubtree().findMin()->root->data;
+            root->data = (rightSubtree().findMin())->root->data;
             root->right.remove(root->data.key);
         }
     }
@@ -142,6 +146,7 @@ const Pair<KeyType, ValueType> *BST<KeyType, ValueType>::operator[](int n) const
     if (n < 0 || n >= size) { /* Index is out of range. */
         return nullptr;
     }
+    
     if (n == root->left.count()) { /* The root has the (n+1)th smallest key. */
         return &root->data;
     } else if (n < root->left.count()) { /* The node is in the left subtree. */

@@ -15,15 +15,18 @@ SmartArray<KeyType, ValueType>::~SmartArray() {
 
 template <typename KeyType, typename ValueType>
 bool SmartArray<KeyType, ValueType>::add(KeyType key, ValueType value) {
-    if (has(key)) {
+    if (has(key)) { /* Cannot add an existed key. */
         return false;
     }
     
-    /* Finds the position for the new pair. */
+    /* Finds the position of the new pair in the new array.
+     * Keeps incrementing new_pair_pos until find data[i] > new_pair. */
     int new_pair_pos = 0;
     for (int i = 0; i < size; ++i) {
-        if (key < data[i]->key) {
-            new_pair_pos = i;
+        if (data[i]->key < key) { /* Still not the position. */
+            new_pair_pos = i + 1;
+        } else {
+            break;
         }
     }
     
@@ -43,7 +46,7 @@ bool SmartArray<KeyType, ValueType>::add(KeyType key, ValueType value) {
     }
     delete data;
     
-    /* Points to the new_data. */
+    /* Points to the new_data and updates size. */
     data = new_data;
     ++size;
     return true;
@@ -51,24 +54,24 @@ bool SmartArray<KeyType, ValueType>::add(KeyType key, ValueType value) {
 
 template <typename KeyType, typename ValueType>
 bool SmartArray<KeyType, ValueType>::remove(KeyType key) {
-    if (!has(key)) {
+    if (!has(key)) { /* Cannot remove if there is no such key. */
         return false;
     }
     
-    /* Finds the position for the new pair. */
-    int old_pair_pos = 0;
+    /* Finds the deleting pair position. */
+    int deleting_pair_pos = 0;
     for (int i = 0; i < size; ++i) {
         if (key == data[i]->key) {
-            old_pair_pos = i;
+            deleting_pair_pos = i;
         }
     }
     
     /* Constructs the new_data array. */
     Pair<KeyType, ValueType> **new_data = new Pair<KeyType, ValueType> *[size - 1];
-    for (int i = 0; i < old_pair_pos; ++i) {
+    for (int i = 0; i < deleting_pair_pos; ++i) {
         new_data[i] = new Pair<KeyType, ValueType>{*(data[i])};
     }
-    for (int i = old_pair_pos; i < size - 1; ++i) {
+    for (int i = deleting_pair_pos; i < size - 1; ++i) {
         new_data[i] = new Pair<KeyType, ValueType>{*(data[i + 1])};
     }
     
@@ -78,7 +81,7 @@ bool SmartArray<KeyType, ValueType>::remove(KeyType key) {
     }
     delete data;
     
-    /* Points to the new_data.*/
+    /* Points to the new_data and updates size.*/
     data = new_data;
     --size;
     return true;
@@ -86,15 +89,16 @@ bool SmartArray<KeyType, ValueType>::remove(KeyType key) {
 
 template <typename KeyType, typename ValueType>
 ValueType SmartArray<KeyType, ValueType>::get(KeyType key) const {
-    if (!has(key)) {
+    if (!has(key)) { /* Returns special value if there is no such key. */
         return typeid(ValueType) == typeid(int) ? 0 : ValueType();
     }
+    /* O(n) sequential search, too lazy to use binary search... */
     for (int i = 0; i < size; ++i) {
         if (key == data[i]->key) {
             return data[i]->value;
         }
     }
-    return ValueType();
+    return ValueType(); // Redundant statement just to silent the compiler...
 }
 
 template <typename KeyType, typename ValueType>

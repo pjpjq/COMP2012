@@ -72,9 +72,9 @@ int main() {
     cout << "bst->height(): " << bst->height() << endl;
     cout << "bst->count(): " << bst->count() << endl;
     cout << "bst->isEmpty(): " << boolalpha << bst->isEmpty() << endl;
-    
+
     delete bst;
-    
+
     cout << endl << endl << "==========" << "Test case 5" << "==========" << endl;
     SmartArray<string, string> *sa = new SmartArray<string, string>;
     cout << endl << "add result: " << boolalpha << sa->add("animal", "dog") << endl;
@@ -87,7 +87,7 @@ int main() {
     cout << "[" << *sa << "]" << endl;
     cout << endl << "remove result: " << boolalpha << sa->remove("food") << endl;
     cout << "[" << *sa << "]" << endl;
-    
+
     ostringstream sout2;
     sout2 << *sa; //this invokes operator<< ( sout2, (*sa) )
     string studentAnswer2 = sout2.str();
@@ -99,13 +99,13 @@ int main() {
         cout << "correct print!" << endl;
         cout << "[" << sout2.str() << "]" << endl;
     }
-    
+
     cout << endl << "sa->has(\"car\"): " << boolalpha << sa->has("car") << endl;
     cout << endl << "sa[0] = (" << (*sa)[0]->key << "," << (*sa)[0]->value << ")" << endl;
     cout << endl << "sa[1] = (" << (*sa)[1]->key << "," << (*sa)[1]->value << ")" << endl;
-    
+
     delete sa;
-    
+
     cout << endl << endl << "==========" << "Test case 6" << "==========" << endl;
     BST<int, int> *bst2 = new BST<int, int>;
     bst2->add(2, 22);
@@ -121,10 +121,10 @@ int main() {
     bst2->printTree();
     cout << "bst3:" << endl;
     bst3->printTree();
-    
+
     delete bst2;
     delete bst3;
-    
+
     cout << endl << endl << "==========" << "Test case 7" << "==========" << endl;
     int tableSize = 5;
     Container<int, string> **bstTable = new Container<int, string> *[tableSize]; //it is created in the main, but should be deleted in HashingVault's destructor
@@ -145,7 +145,7 @@ int main() {
     cout << *bstHV;
     cout << endl << "add result: " << boolalpha << bstHV->add(12, "cccc") << endl;
     cout << *bstHV;
-    
+
     cout << endl << endl << "==========" << "Test case 8" << "==========" << endl;
     int tableSize2 = 4;
     int (*fun2)(int) = [](int n) { return (n * 3) % 4; };
@@ -153,9 +153,9 @@ int main() {
     for (int i = 0; i < tableSize2; i++) { bstTable2[i] = new BST<int, string>; }
     bstHV->rehash(tableSize2, bstTable2, fun2);
     cout << *bstHV;
-    
+
     delete bstHV;
-    
+
     cout << endl << endl << "==========" << "Test case 9" << "==========" << endl;
     int tableSize3 = 3;
     Container<int, int> **saTable = new Container<int, int> *[tableSize3];
@@ -174,7 +174,7 @@ int main() {
     cout << *saHV;
     cout << endl << "add result: " << boolalpha << saHV->add(5, 55) << endl;
     cout << *saHV;
-    
+
     cout << endl << endl << "==========" << "Test case 10" << "==========" << endl;
     int tableSize4 = 2;
     int (*fun4)(int) = [](int n) { return (n / 3) % 2; };
@@ -182,7 +182,7 @@ int main() {
     for (int i = 0; i < tableSize4; i++) { saTable2[i] = new SmartArray<int, int>; }
     saHV->rehash(tableSize4, saTable2, fun4);
     cout << *saHV;
-    
+
     delete saHV;
     
     return 0;
