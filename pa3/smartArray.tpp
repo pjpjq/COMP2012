@@ -10,7 +10,7 @@ SmartArray<KeyType, ValueType>::~SmartArray() {
     for (int i = 0; i < size; ++i) {
         delete data[i];
     }
-    delete data;
+    delete[] data;
 }
 
 template <typename KeyType, typename ValueType>
@@ -44,7 +44,7 @@ bool SmartArray<KeyType, ValueType>::add(KeyType key, ValueType value) {
     for (int i = 0; i < size; ++i) {
         delete data[i];
     }
-    delete data;
+    delete[] data;
     
     /* Points to the new_data and updates size. */
     data = new_data;
@@ -79,7 +79,7 @@ bool SmartArray<KeyType, ValueType>::remove(KeyType key) {
     for (int i = 0; i < size; ++i) {
         delete data[i];
     }
-    delete data;
+    delete[] data;
     
     /* Points to the new_data and updates size.*/
     data = new_data;

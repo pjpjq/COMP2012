@@ -12,7 +12,7 @@ HashingVault<KeyType, ValueType>::~HashingVault() {
     for (int i = 0; i < size; ++i) {
         delete table[i];
     }
-    delete table;
+    delete[] table;
 }
 
 template <typename KeyType, typename ValueType>
@@ -58,5 +58,5 @@ void HashingVault<KeyType, ValueType>::rehash(int size, Container<KeyType, Value
     for (int i = 0; i < old_size; ++i) {
         delete old_table[i];
     }
-    delete old_table;
+    delete[] old_table;
 }
